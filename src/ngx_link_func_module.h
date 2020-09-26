@@ -75,6 +75,11 @@ typedef struct {
     void* __log__;
 } ngx_link_func_cycle_t;
 
+typedef struct {
+    size_t      len;
+    u_char     *data;
+} ngx_str_tem;
+
 extern u_char* ngx_link_func_cyc_get_prop(ngx_link_func_cycle_t *ctx, const char *key, size_t keylen);
 extern void ngx_link_func_cyc_log_debug(ngx_link_func_cycle_t *ctx, const char* msg);
 extern void ngx_link_func_cyc_log_info(ngx_link_func_cycle_t *ctx, const char* msg);
@@ -99,9 +104,10 @@ extern void* ngx_link_func_palloc(ngx_link_func_ctx_t *ctx, size_t size);
 extern void* ngx_link_func_pcalloc(ngx_link_func_ctx_t *ctx, size_t size);
 extern int ngx_link_func_add_header_in(ngx_link_func_ctx_t *ctx, const char *key, size_t keylen, const char *value, size_t val_len );
 extern int ngx_link_func_add_header_out(ngx_link_func_ctx_t *ctx, const char *key, size_t keylen, const char *value, size_t val_len );
-
 extern char *ngx_link_func_strdup(ngx_link_func_ctx_t *ctx, const char *src);
-
+extern ngx_str_tem* ngx_link_func_proxy_get_cache(ngx_link_func_ctx_t *ctx, const char *key, size_t keylen);
+extern void ngx_link_func_proxy_cache_purge(ngx_link_func_ctx_t *ctx, const char *key, size_t keylen);
+extern void ngx_link_func_proxy_cache_purge_all(ngx_link_func_ctx_t *ctx, void *cache);
 
 #define ngx_link_func_log(loglevel, req_context, ...) ({\
 char __buff__[200];\

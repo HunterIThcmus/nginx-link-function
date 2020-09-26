@@ -37,10 +37,10 @@ void my_app_simple_get_greeting(ngx_link_func_ctx_t *ctx) {
 }
 
 void my_app_simple_get_delay_greeting(ngx_link_func_ctx_t *ctx) {
-    ngx_link_func_log_info(ctx, "Calling back and log from my_app_simple_get");
-
+    ngx_link_func_log_info(ctx, "Calling back and log from my_app_simple_get greeting test");
+    void *cache = ngx_link_func_proxy_get_cache(ctx, "hel", 3);
     char *rep = "2 second delay greeting from ngx_link_func testing";
-    sleep(2); 
+    ngx_link_func_proxy_cache_purge_all(ctx,cache);
     ngx_link_func_write_resp(
         ctx,
         200,
